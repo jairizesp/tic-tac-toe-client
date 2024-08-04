@@ -3,6 +3,7 @@ export interface IButtonProps {
   label: string;
   classNames?: string;
   onClick: () => void;
+  isLoading?: boolean;
 }
 
 const Button = (props: IButtonProps) => {
@@ -12,6 +13,7 @@ const Button = (props: IButtonProps) => {
         key={props.name}
         onClick={props.onClick}
         name={props.name}
+        disabled={props.isLoading ?? false}
         className={`px-4 py-2 rounded-md bg-[#e9d5ff] text-[#9333ea] hover:bg-[#9333ea] hover:text-white active:bg-[#d8b4fe] active:text-slate-700 ${props.classNames}`}
       >
         {props.label}

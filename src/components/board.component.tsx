@@ -18,6 +18,7 @@ const Board = () => {
   const [gameEndModal, setGameEndModal] = useState(false);
   const [hasPlayers, setHasPlayers] = useState(false);
   const [playerModal, setPlayerModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [players, setPlayers] = useState<IPlayers>({
     player1: {
       name: "",
@@ -119,9 +120,12 @@ const Board = () => {
   const handleStopClick = () => {
     gameData
       .saveGameData(players)
-      .then((_) => {})
+      .then((_) => {
+        setIsLoading(true);
+      })
       .finally(() => {
         startGame.clearPlayers();
+        setIsLoading(false);
         setPlayerModal(false);
         navigate("/");
       });
@@ -228,12 +232,14 @@ const Board = () => {
                   key="stop-game-btn"
                   label="Stop"
                   name="stop"
+                  isLoading={isLoading}
                   classNames="bg-[#fecdd3] text-[#e11d48]"
                   onClick={handleStopClick}
                 />
 
                 <Button
                   key="continue-game-btn"
+                  isLoading={isLoading}
                   label="Continue"
                   name="continue"
                   onClick={handleContinue}

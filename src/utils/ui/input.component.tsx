@@ -16,6 +16,7 @@ const Input = (props: InputProps) => {
           `w-full border border-slate-300 rounded-md p-4 text-xs outline-none focus:outline-none` +
           props.classNames
         }
+        autoComplete="off"
         type={props.type}
         placeholder={props.placeholder}
         onChange={props.onChange}

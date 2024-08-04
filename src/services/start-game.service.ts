@@ -1,6 +1,17 @@
 import { BehaviorSubject } from "rxjs";
 import { Players } from "../components/start-new-game.component";
 
+export interface Player {
+  name: string;
+  wins: number;
+  losses: number;
+}
+
+export interface IPlayers {
+  player1: Player;
+  player2: Player;
+}
+
 export class StartGame {
   private static instance: StartGame;
 
@@ -9,7 +20,7 @@ export class StartGame {
   //   player2: "",
   // };
 
-  _startNewGame = new BehaviorSubject<Players | null>(null);
+  _startNewGame = new BehaviorSubject<IPlayers | null>(null);
   _isNewGame = new BehaviorSubject<boolean>(true);
 
   static getInstance(): StartGame {
@@ -23,11 +34,7 @@ export class StartGame {
     return this._startNewGame.asObservable();
   }
 
-  hasPlayers(players: Players) {
-    this._startNewGame.next(players);
-  }
-
-  setPlayers(players: Players) {
+  setPlayers(players: IPlayers) {
     this._startNewGame.next(players);
   }
 

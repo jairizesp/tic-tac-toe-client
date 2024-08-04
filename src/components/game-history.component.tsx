@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
 import trophy from "../assets/trophy.svg";
+import { GameData } from "../services/game-data.service";
+import { IPlayers } from "../services/start-game.service";
 
 const dummyHistory = [
   {
@@ -40,23 +43,37 @@ const dummyHistory = [
 ];
 
 const GameHistory = () => {
+  const game = GameData.getInstance();
+
+  const [games, setGames] = useState<IPlayers[]>([]);
+
+  useEffect(() => {
+    game.getGameHistory().then((games) => {
+      console.log(games);
+      //@ts-ignore
+      setGames(games.data);
+    });
+  }, []);
+
   return (
     <>
-      <div className="flex flex-col  w-full h-full px-8 py-8 overflow-auto gap-8 ">
-        <div className="w-full sticky top-0">
-          <h1 className="text-2xl font-bold text-slate-700 bg-[#e9d5ff]">
-            Game History
-          </h1>
+      <div className="flex flex-col  w-full h-full px-8 py-8 overflow-auto gap-6 ">
+        <div className="w-full sticky -top-8 pt-4  bg-[#fae8ff]">
+          <h1 className="text-2xl font-bold text-slate-700 ">Game History</h1>
         </div>
-        {dummyHistory.length
-          ? dummyHistory.map((games, idx) => (
+        {games.length
+          ? games.map((games, idx) => (
               <div key={idx} className="text-slate-600 ">
-                <strong>
-                  Winner:{" "}
-                  {games.player1.wins > games.player2.wins
-                    ? games.player1.name
-                    : games.player2.name}
-                </strong>
+                {games.player1.wins === games.player2.wins ? (
+                  <h1 className="text-xl text-slate-400 font-bold">DRAW</h1>
+                ) : (
+                  <h1 className="text-xl font-bold">
+                    Winner: &nbsp;
+                    {games.player1.wins > games.player2.wins
+                      ? games.player1.name
+                      : games.player2.name}
+                  </h1>
+                )}
                 <p>
                   <span className="font-medium">Player 1:</span>
                   <span
@@ -72,11 +89,15 @@ const GameHistory = () => {
                   </span>
                   &nbsp;
                   {games.player1.wins > games.player2.wins ? (
-                    <img className="w-6 h-6 inline-block" src={trophy} alt="" />
+                    <img
+                      className="w-6 h-6 inline-block pb-1"
+                      src={trophy}
+                      alt=""
+                    />
                   ) : null}
-                  <span className="[&>*]:ml-4 text-xs">
-                    <p>Wins: {games.player1.wins}</p>
-                    <p>Losses: {games.player1.losses}</p>
+                  <span className="[&>*]:ml-4 text-xs [&>*]:block">
+                    <span>Wins: {games.player1.wins}</span>
+                    <span>Losses: {games.player1.losses}</span>
                   </span>
                 </p>
                 <p>
@@ -94,11 +115,15 @@ const GameHistory = () => {
                   </span>
                   &nbsp;
                   {games.player2.wins > games.player1.wins ? (
-                    <img className="w-6 h-6 inline-block" src={trophy} alt="" />
+                    <img
+                      className="w-6 h-6 inline-block pb-1"
+                      src={trophy}
+                      alt=""
+                    />
                   ) : null}
-                  <span className="[&>*]:ml-4 text-xs">
-                    <p>Wins: {games.player2.wins}</p>
-                    <p>Losses: {games.player2.losses}</p>
+                  <span className="[&>*]:ml-4 text-xs [&>*]:block">
+                    <span>Wins: {games.player2.wins}</span>
+                    <span>Losses: {games.player2.losses}</span>
                   </span>
                 </p>
               </div>

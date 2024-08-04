@@ -3,45 +3,6 @@ import trophy from "../assets/trophy.svg";
 import { GameData } from "../services/game-data.service";
 import { IPlayers } from "../services/start-game.service";
 
-const dummyHistory = [
-  {
-    player1: {
-      name: "John",
-      wins: 7,
-      losses: 3,
-    },
-    player2: {
-      name: "Mark",
-      wins: 4,
-      losses: 7,
-    },
-  },
-  {
-    player1: {
-      name: "Joseph",
-      wins: 2,
-      losses: 4,
-    },
-    player2: {
-      name: "Thomas",
-      wins: 4,
-      losses: 3,
-    },
-  },
-  {
-    player1: {
-      name: "Peter",
-      wins: 6,
-      losses: 1,
-    },
-    player2: {
-      name: "Judas",
-      wins: 1,
-      losses: 6,
-    },
-  },
-];
-
 const GameHistory = () => {
   const game = GameData.getInstance();
 

@@ -1,5 +1,3 @@
-import React from "react";
-
 export interface IButtonProps {
   name: string;
   label: string;

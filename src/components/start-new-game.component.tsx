@@ -1,10 +1,10 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import Modal, { ModalWidthSizes } from "../utils/ui/modal.component";
 import Input from "../utils/ui/input.component";
 import { IPlayers, StartGame } from "../services/start-game.service";
-import { Subscription, takeUntil } from "rxjs";
+import { Subscription } from "rxjs";
 import Button from "../utils/ui/button.component";
-import { redirect, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export interface IStartNewGameProps {
   openModal: () => void;

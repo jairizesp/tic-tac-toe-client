@@ -3,7 +3,7 @@ import Board from "./components/board.component";
 import logo from "./assets/590-5903239_hash-png-picture-tic-tac-toe-board-svg.svg";
 import StartNewGame from "./components/start-new-game.component";
 import GameHistory from "./components/game-history.component";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import BackButton from "./utils/ui/back-button.component";
 import { StartGame } from "./services/start-game.service";
 import { useEffect } from "react";

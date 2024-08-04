@@ -4,7 +4,6 @@ import { IPlayers, StartGame } from "../services/start-game.service";
 import Button from "../utils/ui/button.component";
 import Modal, { ModalWidthSizes } from "../utils/ui/modal.component";
 import Input from "../utils/ui/input.component";
-import { Players } from "./start-new-game.component";
 import { useNavigate } from "react-router-dom";
 import { GameData } from "../services/game-data.service";
 
@@ -19,7 +18,6 @@ const Board = () => {
   const [gameEndModal, setGameEndModal] = useState(false);
   const [hasPlayers, setHasPlayers] = useState(false);
   const [playerModal, setPlayerModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [players, setPlayers] = useState<IPlayers>({
     player1: {
       name: "",
@@ -121,11 +119,10 @@ const Board = () => {
   const handleStopClick = () => {
     gameData
       .saveGameData(players)
-      .then((data) => setIsLoading(true))
+      .then((_) => {})
       .finally(() => {
         box.map((el) => (el = null));
         startGame.clearPlayers();
-        setIsLoading(false);
         setPlayerModal(false);
         navigate("/");
       });

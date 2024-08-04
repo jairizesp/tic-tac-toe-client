@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export interface IBoxProps {
   value: number;
   click: () => void;

@@ -1,5 +1,4 @@
 import { BehaviorSubject } from "rxjs";
-import { Players } from "../components/start-new-game.component";
 
 export interface Player {
   name: string;

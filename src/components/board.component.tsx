@@ -121,7 +121,6 @@ const Board = () => {
       .saveGameData(players)
       .then((_) => {})
       .finally(() => {
-        box.map((el) => (el = null));
         startGame.clearPlayers();
         setPlayerModal(false);
         navigate("/");
@@ -326,12 +325,6 @@ const Board = () => {
                   label="Submit"
                   onClick={handlePlayerClick}
                 />
-                {/* <button
-          className="bg-[#d8b4fe] rounded-md px-4 py-2 text-slate-700 hover:bg-[#9333ea] hover:text-white active:bg-[#d8b4fe] active:text-slate-700"
-          onClick={handlePlayerClick}
-        >
-          Submit
-        </button> */}
               </div>
             </div>
           </Modal>

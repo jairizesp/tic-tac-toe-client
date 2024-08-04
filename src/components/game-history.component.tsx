@@ -11,16 +11,18 @@ const GameHistory = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    game
-      .getGameHistory()
-      .then((games) => {
-        setIsLoading(true);
-        //@ts-ignore
-        setGames(games.data);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+    async () => {
+      setIsLoading(true);
+      await game
+        .getGameHistory()
+        .then((games) => {
+          //@ts-ignore
+          setGames(games.data);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    };
   }, []);
 
   return (

@@ -19,6 +19,7 @@ const Board = () => {
   const [hasPlayers, setHasPlayers] = useState(false);
   const [playerModal, setPlayerModal] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDraw, setIsDraw] = useState(false)
   const [players, setPlayers] = useState<IPlayers>({
     player1: {
       name: "",
@@ -157,6 +158,12 @@ const Board = () => {
       setWinner(winnerPlayer);
       status = "Winner: " + winner;
     } else {
+      const draw = box.every(square => square !== null)
+      if(draw){
+        setIsDraw(draw)
+         setGameEndModal(true);
+      }
+     
       status = "Next player: " + (xIsNext ? "X" : "O");
     }
   }, [xIsNext]);
@@ -224,10 +231,12 @@ const Board = () => {
               onClose={() => setGameEndModal(false)}
             >
               <div className="flex flex-col gap-4">
-                <h1>
+                {isDraw ?  <h1>
+                  <span className="font-semibold text-slate-600">DRAW</span>
+                </h1> :  <h1>
                   <span className="font-semibold text-[#9333ea]">{winner}</span>{" "}
                   won!
-                </h1>
+                </h1>}
                 <Button
                   key="stop-game-btn"
                   label="Stop"

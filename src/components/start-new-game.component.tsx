@@ -52,7 +52,7 @@ const StartNewGame = () => {
   };
 
   const handlePlayerClick = () => {
-    if (!players.player1 || !players.player2) return;
+    if (!players.player1.name || !players.player2.name) return;
     startGame.setPlayers(players);
     setModalState(false);
     navigate("/board");

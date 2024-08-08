@@ -134,6 +134,9 @@ const Board = () => {
 
   useEffect(() => {
     const winner = calculateWinner(box);
+    if(isDraw){
+      setIsDraw(false)
+    }
     if (winner) {
       setGameEndModal(true);
       let winnerPlayer = "";

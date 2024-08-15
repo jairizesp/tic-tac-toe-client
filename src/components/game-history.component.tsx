@@ -23,19 +23,24 @@ const GameHistory = () => {
       });
   }, []);
 
-  return (
-    <>
-      {isLoading ? (
-        <div className="flex flex-col  w-full h-full justify-center items-center">
+  if(isLoading) {
+    return (
+      <div className="flex flex-col  w-full h-full justify-center items-center">
           <Spinner />
         </div>
-      ) : (
-        <div className="flex flex-col  w-full h-full px-8 py-8 overflow-auto gap-6 ">
-          <div className="w-full sticky -top-8 pt-4  bg-[#fae8ff]">
-            <h1 className="text-2xl font-bold text-slate-700 ">Game History</h1>
-          </div>
-          {games?.length
-            ? games.map((games, idx) => (
+    )
+  }
+
+  if(!games.length) {
+    return (
+      <p>No games found.</p>
+    )
+  }
+
+  return (
+    <>
+      {
+        games.map((games, idx) => (
                 <div key={idx} className="text-slate-600 ">
                   {games.player1.wins === games.player2.wins ? (
                     <h1 className="text-xl text-slate-400 font-bold">DRAW</h1>
@@ -100,10 +105,7 @@ const GameHistory = () => {
                     </span>
                   </p>
                 </div>
-              ))
-            : "No Games Found."}
-        </div>
-      )}
+              )) } 
     </>
   );
 };
